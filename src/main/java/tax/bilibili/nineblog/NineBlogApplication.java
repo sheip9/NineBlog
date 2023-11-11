@@ -5,9 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * NineBlogApplication
+ *
  * @author sheip9
  * @since  2023/10/22 19:20
- *
  */
 @SpringBootApplication
 @MapperScan("tax.bilibili.nineblog.mapper")

@@ -9,7 +9,10 @@ import tax.bilibili.nineblog.service.IUserService;
 import tax.bilibili.nineblog.service.Impl.UserServiceImpl;
 
 /**
+ * UserController
+ *
  * @author sheip9
+ * @since 2023/10/22 19:31
  */
 @RestController
 @RequestMapping("/user")
@@ -28,6 +31,6 @@ public class UserController {
         if (i < 1) {
 //            return RestResponse
         }
-        return RestResponse.Ok();
+        return RestResponse.ok();
     }
 }

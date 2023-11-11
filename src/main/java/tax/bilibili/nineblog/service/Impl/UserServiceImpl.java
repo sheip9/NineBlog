@@ -10,8 +10,14 @@ import tax.bilibili.nineblog.mapper.UserMapper;
 import tax.bilibili.nineblog.service.IUserService;
 import tax.bilibili.nineblog.util.CovertUtil;
 
+/**
+ * UserServiceImpl
+ *
+ * @author sheip9
+ * @since 2023/10/22 19:31
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor = { Exception.class })
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     UserMapper userMapper;
     CovertUtil convertUtil;

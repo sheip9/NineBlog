@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 import tax.bilibili.nineblog.Enum.User.UserType;
 
 /**
- * @author sheip9
- * @since  2023/10/22 19:20
+ * Article
  *
+ * @author sheip9
+ * @since 2023/10/22 19:31
  */
 @Data
 @TableName("nine_users")

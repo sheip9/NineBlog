@@ -7,7 +7,10 @@ import lombok.Data;
 import tax.bilibili.nineblog.Enum.User.UserType;
 
 /**
+ * UserDto
+ *
  * @author sheip9
+ * @since 2023/10/22 19:31
  */
 @Data
 @AllArgsConstructor
