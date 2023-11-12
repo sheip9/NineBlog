@@ -14,7 +14,7 @@ import tax.bilibili.nineblog.Enum.User.UserType;
  * @since 2023/10/22 19:31
  */
 @Data
-@TableName("nine_users")
+@TableName("users")
 @NoArgsConstructor
 public class User {
     @TableId(value = "id", type = IdType.AUTO)

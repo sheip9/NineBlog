@@ -19,20 +19,18 @@ import tax.bilibili.nineblog.util.CovertUtil;
 @Service
 @Transactional(rollbackFor = { Exception.class })
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-    UserMapper userMapper;
     CovertUtil convertUtil;
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, CovertUtil convertUtil) {
-        this.userMapper = userMapper;
+    public UserServiceImpl(CovertUtil convertUtil) {
         this.convertUtil = convertUtil;
     }
 
     @Override
-    public int addUser(UserDto userDto) {
+    public boolean addUser(UserDto userDto) {
         User user = convertUtil.convertObj(userDto, User.class);
         System.out.println(user);
         user.setRegistered(System.currentTimeMillis());
-        return userMapper.insert(user);
+        return save(user);
     }
 }

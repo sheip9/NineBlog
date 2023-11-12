@@ -13,5 +13,11 @@ import tax.bilibili.nineblog.entity.User;
  */
 @Component
 public interface IUserService extends IService<User> {
-    int addUser(UserDto userDto);
+    /***
+     * addUser
+     *
+     * @param userDto userDto
+     * @return success or not
+     */
+    boolean addUser(UserDto userDto);
 }

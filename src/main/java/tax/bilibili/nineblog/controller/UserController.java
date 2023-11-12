@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tax.bilibili.nineblog.Dto.UserDto;
+import tax.bilibili.nineblog.Enum.User.UserType;
 import tax.bilibili.nineblog.entity.RestResponse;
 import tax.bilibili.nineblog.service.IUserService;
 import tax.bilibili.nineblog.service.Impl.UserServiceImpl;
@@ -26,11 +27,12 @@ public class UserController {
 
     @PostMapping("/reg")
     @ResponseBody
-    public RestResponse<?> register(@Valid @RequestBody UserDto userDto) {
+    public RestResponse<?> publicRegister(@Valid @RequestBody UserDto userDto) {
+        userDto.setType(UserType.GUEST);
         int i = userService.addUser(userDto);
-        if (i < 1) {
+//        if (i < 1) {
 //            return RestResponse
-        }
+//        }
         return RestResponse.ok();
     }
 }
