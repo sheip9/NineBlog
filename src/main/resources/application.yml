@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: NineBlog
+  r2dbc:
+    name:
+    password:
+    url:
+
+
