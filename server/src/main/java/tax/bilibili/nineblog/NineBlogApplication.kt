@@ -2,8 +2,10 @@ package tax.bilibili.nineblog
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.ComponentScan
 
+@EnableCaching
 @SpringBootApplication
 @ComponentScan(basePackages = ["tax.bilibili.nineblog.application"])
 open class NineBlogApplication
