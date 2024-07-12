@@ -23,15 +23,17 @@ repositories {
 }
 
 dependencies {
-    implementation("com.mybatis-flex:mybatis-flex-spring-boot-starter:1.8.7")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 //    implementation("cn.dev33:sa-token-spring-boot3-starter:1.37.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("io.projectreactor:reactor-test")
-    runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly("io.asyncer:r2dbc-mysql:1.1.0")
+    runtimeOnly("org.postgresql:r2dbc-postgresql:1.0.5.RELEASE")
+    runtimeOnly("io.r2dbc:r2dbc-mssql:1.0.0.RELEASE")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
 }
 
 tasks.withType<Test> {

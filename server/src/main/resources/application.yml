@@ -1,9 +1,11 @@
 spring:
   application:
     name: NineBlog
-  r2dbc:
-    name:
-    password:
-    url:
-
+nineblog:
+  database:
+    type: pgsql
+    user: postgres
+    password: postgres
+    host: 192.168.1.192
+    port: 5432
 

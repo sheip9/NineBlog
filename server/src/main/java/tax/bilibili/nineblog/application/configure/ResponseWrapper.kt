@@ -43,15 +43,18 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
             }
             return RestResponse(code, message, o)
         }
+
+        val mapper: (Any) -> Mono<Any> = { it : Any -> Mono.just(build(it))}
+
         if (result is Mono<*>) {
             return result
-                .map { build(it) }
+                .flatMap(mapper)
                 .defaultIfEmpty(RestResponse<Any>(code, message))
         }
         if(result is Flux<*>){
             return result
                 .collectList()
-                .map { build(it) }
+                .flatMap(mapper)
                 .defaultIfEmpty(RestResponse<Any>(code, message))
         }
         return build(result)

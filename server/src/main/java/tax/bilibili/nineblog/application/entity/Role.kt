@@ -1,8 +1,5 @@
 package tax.bilibili.nineblog.application.entity
 
-import com.mybatisflex.annotation.Table
-
-@Table("roles")
 data class Role(
     val id: Int,
     val level: Int,
