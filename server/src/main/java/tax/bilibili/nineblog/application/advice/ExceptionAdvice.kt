@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.application.model.RestResponse
 
 @RestControllerAdvice
+@Suppress("ReactiveStreamsUnusedPublisher")
 class ExceptionAdvice : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(RuntimeException::class)
