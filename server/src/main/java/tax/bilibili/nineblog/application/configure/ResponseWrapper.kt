@@ -10,9 +10,12 @@ import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.NineBlog
+import tax.bilibili.nineblog.application.advice.ExceptionAdvice
 import tax.bilibili.nineblog.application.annoucement.OnOk
 import tax.bilibili.nineblog.application.model.RestResponse
+import java.util.regex.Pattern
 
+@Suppress("UastIncorrectHttpHeaderInspection", "ReactiveStreamsUnusedPublisher")
 class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedContentTypeResolver) :
     ResponseBodyResultHandler(
         writers,
@@ -23,8 +26,12 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
         exchange.response.headers.add("X-Powered-By", "NineBlog/${NineBlog.VERSION}")
         exchange.response.headers.set("Content-Type", "application/json")
 
-        if(result.returnValue is RestResponse<*>) {
+        if (result.returnTypeSource.executable.declaringClass == ExceptionAdvice::class.java) {
             return writeBody(result.returnValue, result.returnTypeSource, exchange)
+        }
+
+        if(result.returnValue is RestResponse<*>) {
+            return writeBody(result.returnValue?.let { Mono.just(it) }, result.returnTypeSource, exchange)
         }
 
         val okAnnotation = result.returnTypeSource.getMethodAnnotation(OnOk::class.java) ?: OnOk()
@@ -33,7 +40,9 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
         val restfulResult = makeResultRestful(result.returnValue, okAnnotation.code, message)
         return writeBody(restfulResult, result.returnTypeSource, exchange)
     }
+
     private fun makeResultRestful(result: Any?, code: HttpStatus, message: String): Any {
+
         fun build(o : Any?): Any {
             if(o is RestResponse<*>) {
                 return o
@@ -53,10 +62,20 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
         }
         if(result is Flux<*>){
             return result
-                .collectList()
-                .flatMap(mapper)
-                .defaultIfEmpty(RestResponse<Any>(code, message))
+//            return result
+//                .collectList()
+//                .flatMap(mapper)
+//                .defaultIfEmpty(RestResponse<Any>(code, message))
         }
         return build(result)
+    }
+
+    private fun messageResolver(message : String){
+        val pattern = Pattern.compile("\\{([^}]*)\\}")
+        val matcher = pattern.matcher(message)
+        while(matcher.find()){
+            val placeholder = matcher.group(1)
+            message.replace("{${placeholder}}", placeholder)
+        }
     }
 }
