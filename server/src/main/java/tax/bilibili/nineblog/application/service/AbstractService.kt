@@ -5,9 +5,10 @@ import org.springframework.data.r2dbc.repository.R2dbcRepository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> : IService {
+abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> {
+    @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    lateinit var repository : R;
+    lateinit var repository : R
 
     fun save(entity: T): Mono<T> {
         return repository.save(entity!!)
@@ -18,7 +19,7 @@ abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> : IService {
     }
 
 //    fun update(id: ID, entity: T): Mono<T> {
-//        return repositoty.
+//        return repository.
 //    }
 
     fun queryAll(): Flux<T> {
@@ -26,6 +27,6 @@ abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> : IService {
     }
 
     fun queryById(id : ID) : Mono<T> {
-        return repository.findById(id!!);
+        return repository.findById(id!!)
     }
 }
