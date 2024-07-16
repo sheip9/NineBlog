@@ -2,7 +2,7 @@ package tax.bilibili.nineblog.application.entity
 
 import org.springframework.data.annotation.Id
 
-
+//@Table(value = "#{@dataSource.tablePrefix}article")
 data class Article(
     @Id
     val id: Int?,

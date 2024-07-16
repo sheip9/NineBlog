@@ -17,4 +17,7 @@ class CommonArticleController @Autowired constructor(private val service: Articl
 
     @GetMapping("/{id}")
     fun getArticleById(@PathVariable id: Number) = service.queryById(id)
+
+    @GetMapping("/count")
+    fun getCount() = service.count()
 }

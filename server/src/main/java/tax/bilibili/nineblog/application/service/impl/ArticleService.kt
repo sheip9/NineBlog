@@ -7,4 +7,5 @@ import tax.bilibili.nineblog.application.service.AbstractService
 
 @Service
 class ArticleService : AbstractService<ArticleRepository, Article, Number>() {
+
 }
