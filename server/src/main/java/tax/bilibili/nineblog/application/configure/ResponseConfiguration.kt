@@ -6,7 +6,7 @@ import org.springframework.http.codec.ServerCodecConfigurer
 import org.springframework.web.reactive.accept.RequestedContentTypeResolver
 
 @Configuration
-open class WebFluxConfiguration {
+open class ResponseConfiguration {
     @Bean
     open fun responseWrapper(
         serverCodecConfigurer: ServerCodecConfigurer,
