@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
+import tax.bilibili.nineblog.application.annoucement.AdminApi
 import tax.bilibili.nineblog.application.entity.Article
 import tax.bilibili.nineblog.application.service.impl.ArticleService
 
 @RestController
+@AdminApi
 @RequestMapping("/admin/articles")
 class AdminArticleController @Autowired constructor(
     private val articleService: ArticleService
