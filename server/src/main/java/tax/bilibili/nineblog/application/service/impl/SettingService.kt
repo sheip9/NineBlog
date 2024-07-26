@@ -20,5 +20,6 @@ class SettingService : AbstractService<SettingRepository, Setting, Number>() {
             map[SettingKey.SITE_FOOTER]!!,
         ))
     }
+
     fun updateOneSetting(key: SettingKey, value: String): Mono<Boolean> = repository.updateByKey(key, value)
 }
