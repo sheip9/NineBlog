@@ -5,8 +5,10 @@ server:
   http2:
     enabled: true
 
+
+
 nineblog:
-  database:
+  datasource:
     type: pgsql
     user: postgres
     password: postgres
