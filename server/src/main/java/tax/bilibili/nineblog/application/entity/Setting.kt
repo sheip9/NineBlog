@@ -1,3 +1,5 @@
 package tax.bilibili.nineblog.application.entity
 
-data class Setting(val key: String, val value: String)
+import tax.bilibili.nineblog.application.constant.SettingKey
+
+data class Setting(val key: SettingKey, val value: String)
