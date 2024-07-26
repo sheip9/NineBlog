@@ -2,7 +2,6 @@ package tax.bilibili.nineblog.application.configure
 
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
-import io.r2dbc.spi.ConnectionFactoryOptions
 import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -17,15 +16,14 @@ open class R2dbcConfiguration(
     @Bean
     override fun connectionFactory(): ConnectionFactory {
         return ConnectionFactories.get(
-            ConnectionFactoryOptions.builder()
-                .option<String>(DRIVER, datasource.driver)
-                .option<String>(HOST, datasource.host)
-                .option<Int>(PORT, datasource.port)
-                .option<String>(USER, datasource.user)
-                .option<CharSequence>(PASSWORD, datasource.password)
-                .option<String>(DATABASE, datasource.database)
+            builder()
+                .option(DRIVER, datasource.driver)
+                .option(HOST, datasource.host)
+                .option(PORT, datasource.port)
+                .option(USER, datasource.user)
+                .option(PASSWORD, datasource.password)
+                .option(DATABASE, datasource.database)
                 .build()
         )
     }
-
 }
