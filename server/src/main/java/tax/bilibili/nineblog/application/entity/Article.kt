@@ -5,11 +5,11 @@ import org.springframework.data.annotation.Id
 //@Table(value = "#{@dataSource.tablePrefix}article")
 data class Article(
     @Id
-    val id: Int?,
-    val authorId: Int,
+    val id: Number?,
+    val authorId: Number,
     val title: String,
     val content: String,
     val createdAt: String?,
     val updatedAt: String?,
-    val visibilityLevel: Int,
+    val visibilityLevel: Number,
 )
