@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import tax.bilibili.nineblog.application.annoucement.CommonApi
-import tax.bilibili.nineblog.application.service.impl.SettingService
+import tax.bilibili.nineblog.application.service.SettingService
 
 @RestController
 @CommonApi

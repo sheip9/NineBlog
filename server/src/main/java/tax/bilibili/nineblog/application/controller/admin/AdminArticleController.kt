@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.application.annoucement.AdminApi
 import tax.bilibili.nineblog.application.entity.Article
-import tax.bilibili.nineblog.application.service.impl.ArticleService
+import tax.bilibili.nineblog.application.service.ArticleService
 
 @RestController
 @AdminApi

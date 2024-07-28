@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import tax.bilibili.nineblog.application.annoucement.CommonApi
 import tax.bilibili.nineblog.application.annoucement.OnOk
-import tax.bilibili.nineblog.application.service.impl.ArticleService
+import tax.bilibili.nineblog.application.service.ArticleService
 
 @RestController
 @CommonApi
