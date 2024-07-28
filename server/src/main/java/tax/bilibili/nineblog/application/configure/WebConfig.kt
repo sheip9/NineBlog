@@ -9,6 +9,7 @@ import org.springframework.web.reactive.config.PathMatchConfigurer
 import org.springframework.web.reactive.config.ViewResolverRegistry
 import org.springframework.web.reactive.config.WebFluxConfigurer
 import org.thymeleaf.spring6.view.reactive.ThymeleafReactiveViewResolver
+import tax.bilibili.nineblog.application.annoucement.AdminApi
 import tax.bilibili.nineblog.application.annoucement.CommonApi
 
 
@@ -20,6 +21,9 @@ open class WebConfig @Autowired constructor(
     override fun configurePathMatching(configurer: PathMatchConfigurer) {
         configurer.addPathPrefix(
             "/api/common", HandlerTypePredicate.forAnnotation(CommonApi::class.java)
+        )
+        configurer.addPathPrefix(
+            "/api/admin", HandlerTypePredicate.forAnnotation(AdminApi::class.java)
         )
         configurer.addPathPrefix(
             "/api", HandlerTypePredicate.forAnnotation(RestController::class.java)
