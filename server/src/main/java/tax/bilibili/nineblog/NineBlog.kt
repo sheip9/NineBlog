@@ -6,6 +6,5 @@ object NineBlog {
 }
 private object BranchEnum {
     const val DEV = "dev"
-    const val PRERELEASE = "prerelease"
     const val RELEASE = "release"
 }
