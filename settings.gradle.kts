@@ -3,4 +3,5 @@ plugins {
 }
 rootProject.name = "NineBlog"
 include(":server")
+include(":theme-test")
 //include(":adminfrontend")
