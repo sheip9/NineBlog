@@ -1,4 +1,3 @@
 package tax.bilibili.nineblog.application.exception
 
-abstract class ClientException : RuntimeException(){
-}
+abstract class ClientException : RuntimeException()

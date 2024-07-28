@@ -28,7 +28,6 @@ open class WebConfig @Autowired constructor(
         configurer.addPathPrefix(
             "/api", HandlerTypePredicate.forAnnotation(RestController::class.java)
         )
-
     }
 
     /**
