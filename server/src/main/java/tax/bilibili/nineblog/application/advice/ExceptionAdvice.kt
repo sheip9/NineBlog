@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.reactive.result.method.annotation.ResponseEntityExceptionHandler
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
+import tax.bilibili.nineblog.application.exception.BusinessException
+import tax.bilibili.nineblog.application.exception.ClientException
 import tax.bilibili.nineblog.application.model.RestResponse
 
 @RestControllerAdvice
@@ -26,6 +28,9 @@ class ExceptionAdvice : ResponseEntityExceptionHandler() {
         }
         exchange.response.statusCode = status
         Thread().run {
+            if(e is ClientException || e is BusinessException) {
+                return@run
+            }
             e.printStackTrace()
         }
         return Mono.just(RestResponse(status.value(), message, null))
