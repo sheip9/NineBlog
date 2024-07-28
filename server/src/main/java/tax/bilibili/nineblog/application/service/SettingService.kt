@@ -1,4 +1,4 @@
-package tax.bilibili.nineblog.application.service.impl
+package tax.bilibili.nineblog.application.service
 
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
@@ -6,7 +6,6 @@ import tax.bilibili.nineblog.application.constant.SettingKey
 import tax.bilibili.nineblog.application.entity.Setting
 import tax.bilibili.nineblog.application.model.SiteInfo
 import tax.bilibili.nineblog.application.repository.SettingRepository
-import tax.bilibili.nineblog.application.service.AbstractService
 
 @Service
 class SettingService : AbstractService<SettingRepository, Setting, Number>() {
