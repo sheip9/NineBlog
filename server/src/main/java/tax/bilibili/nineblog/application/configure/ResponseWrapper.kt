@@ -36,11 +36,13 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
 
         val okAnnotation = result.returnTypeSource.getMethodAnnotation(OnOk::class.java) ?: OnOk()
         exchange.response.statusCode = okAnnotation.code
-        val message = okAnnotation.message
-        val restfulResult = makeResultRestful(result.returnValue, okAnnotation.code, message)
-        return writeBody(restfulResult, result.returnTypeSource, exchange)
+//        val message = okAnnotation.message
+//        val restfulResult = makeResultRestful(result.returnValue, okAnnotation.code, message)
+        
+        return writeBody(result.returnValue, result.returnTypeSource, exchange)
     }
-
+    
+    @Deprecated("")
     private fun makeResultRestful(result: Any?, code: HttpStatus, message: String): Any {
 
         fun build(o : Any?): Any {
@@ -69,7 +71,8 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
         }
         return build(result)
     }
-
+    
+    @Deprecated("")
     private fun messageResolver(message : String){
         val pattern = Pattern.compile("\\{([^}]*)\\}")
         val matcher = pattern.matcher(message)
