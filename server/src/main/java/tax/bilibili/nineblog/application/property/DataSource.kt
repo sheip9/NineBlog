@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 
 @Component(value = "dataSource")
 @ConfigurationProperties(prefix = "nineblog.datasource")
-class DataSource  {
+class DataSource {
     @Suppress("MemberVisibilityCanBePrivate")
     var type: DatabaseType? = null
     var host: String = "127.0.0.1"
@@ -19,5 +19,5 @@ class DataSource  {
 }
 @Suppress("unused")
 enum class DatabaseType(val value: String) {
-    MYSQL("mysql"), PGSQL("postgresql"), MSSQL("mssql"), H2DB("h2")
+    MYSQL("mysql"), POSTGRES("postgresql"), MSSQL("mssql"), H2DB("h2")
 }
