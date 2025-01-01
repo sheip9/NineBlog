@@ -7,7 +7,9 @@ data class Comment(
     @Id
     val id: Long? = 0,
     var articleId: Number,
+    var replyTo: Number?,
     var userId: Number?,
+    var nickname: String?,
     var email: String,
     var content: String,
     var createdAt: String?,
