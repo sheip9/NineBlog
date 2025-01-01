@@ -1,7 +1,9 @@
 package tax.bilibili.nineblog.application.entity
 
+import tax.bilibili.nineblog.application.constant.IdType
+
 data class User(
-    val id: Int,
+    val id: IdType,
     val username: String,
     val nickname: String,
     val email: String,

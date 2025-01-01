@@ -4,10 +4,11 @@ import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.r2dbc.repository.R2dbcRepository
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
+import tax.bilibili.nineblog.application.constant.IdType
 import tax.bilibili.nineblog.application.entity.Article
 
 @Repository
-interface ArticleRepository : R2dbcRepository<Article, Number> {
+interface ArticleRepository : R2dbcRepository<Article, IdType> {
 
     @Query(
         "SELECT id, author_id, title, LEFT(content, 5) AS content, created_at, updated_at, visibility_level" +
