@@ -7,5 +7,5 @@ import tax.bilibili.nineblog.application.entity.NavItem
 
 @Repository
 interface NavItemRepository : R2dbcRepository<NavItem, Number> {
-    fun findNavItemByOrderByPriority() : Flux<NavItem>
+    fun findNavItemByOrderByPriority(): Flux<NavItem>
 }

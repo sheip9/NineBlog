@@ -2,7 +2,7 @@ package tax.bilibili.nineblog.application.entity
 
 import org.springframework.data.annotation.Id
 
-data class NavItem (
+data class NavItem(
     @Id
     val id: Number,
     val text: String,
