@@ -5,7 +5,7 @@ import java.time.ZonedDateTime
 
 data class Comment(
     @Id
-    val id: Long? = 0,
+    val id: Number? = 0,
     var articleId: Number,
     var replyTo: Number?,
     var userId: Number?,
