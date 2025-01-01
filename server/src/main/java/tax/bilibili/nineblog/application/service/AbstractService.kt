@@ -9,9 +9,10 @@ import reactor.core.publisher.Mono
 abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> {
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    lateinit var repository : R
+    lateinit var repository: R
+
     @Autowired
-    lateinit var template : R2dbcEntityTemplate
+    lateinit var template: R2dbcEntityTemplate
 
     fun save(entity: T): Mono<T> {
         return repository.save(entity!!)
@@ -29,9 +30,10 @@ abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> {
         return repository.findAll()
     }
 
-    fun queryById(id : ID) : Mono<T> {
+    fun queryById(id: ID): Mono<T> {
         return repository.findById(id!!)
     }
+
     fun count(): Mono<Long> {
         return repository.count()
     }

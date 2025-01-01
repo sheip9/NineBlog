@@ -4,7 +4,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 import org.springframework.cache.annotation.EnableCaching
-import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.annotation.ComponentScan
 
 @EnableCaching
@@ -19,7 +18,7 @@ open class NineBlogInitializeApplication
 
 fun main(args: Array<String>) {
     //TODO: 判断程序配置是否初始化
-    if(true) {
+    if (true) {
         runApplication<NineBlogApplication>(*args)
     } else {
         runApplication<NineBlogInitializeApplication>(*args)

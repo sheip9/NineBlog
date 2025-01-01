@@ -30,7 +30,7 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
             return writeBody(result.returnValue, result.returnTypeSource, exchange)
         }
 
-        if(result.returnValue is RestResponse<*>) {
+        if (result.returnValue is RestResponse<*>) {
             return writeBody(result.returnValue?.let { Mono.just(it) }, result.returnTypeSource, exchange)
         }
 
@@ -38,31 +38,31 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
         exchange.response.statusCode = okAnnotation.code
 //        val message = okAnnotation.message
 //        val restfulResult = makeResultRestful(result.returnValue, okAnnotation.code, message)
-        
+
         return writeBody(result.returnValue, result.returnTypeSource, exchange)
     }
-    
+
     @Deprecated("")
     private fun makeResultRestful(result: Any?, code: HttpStatus, message: String): Any {
 
-        fun build(o : Any?): Any {
-            if(o is RestResponse<*>) {
+        fun build(o: Any?): Any {
+            if (o is RestResponse<*>) {
                 return o
             }
-            if(o is String){
+            if (o is String) {
                 return ObjectMapper().writeValueAsString(RestResponse(code, message, o))
             }
             return RestResponse(code, message, o)
         }
 
-        val mapper: (Any) -> Mono<Any> = { it : Any -> Mono.just(build(it))}
+        val mapper: (Any) -> Mono<Any> = { it: Any -> Mono.just(build(it)) }
 
         if (result is Mono<*>) {
             return result
                 .flatMap(mapper)
                 .defaultIfEmpty(RestResponse<Any>(code, message))
         }
-        if(result is Flux<*>){
+        if (result is Flux<*>) {
             return result
 //            return result
 //                .collectList()
@@ -71,12 +71,12 @@ class ResponseWrapper(writers: List<HttpMessageWriter<*>?>, resolver: RequestedC
         }
         return build(result)
     }
-    
+
     @Deprecated("")
-    private fun messageResolver(message : String){
+    private fun messageResolver(message: String) {
         val pattern = Pattern.compile("\\{([^}]*)\\}")
         val matcher = pattern.matcher(message)
-        while(matcher.find()){
+        while (matcher.find()) {
             val placeholder = matcher.group(1)
             message.replace("{${placeholder}}", placeholder)
         }

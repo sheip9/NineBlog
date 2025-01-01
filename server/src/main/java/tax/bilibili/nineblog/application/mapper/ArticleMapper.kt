@@ -6,4 +6,4 @@ import tax.bilibili.nineblog.application.model.dataTransfer.ArticleDTO
 import tax.bilibili.nineblog.application.model.view.ArticleVo
 
 @Mapper
-interface ArticleMapper: BaseMapper<ArticleDTO, Article, ArticleVo>
+interface ArticleMapper : BaseMapper<ArticleDTO, Article, ArticleVo>

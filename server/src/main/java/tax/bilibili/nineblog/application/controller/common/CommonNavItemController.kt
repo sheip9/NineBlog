@@ -12,7 +12,7 @@ import tax.bilibili.nineblog.application.service.NavItemService
 @RequestMapping("/nav-items")
 class CommonNavItemController @Autowired constructor(
     private val service: NavItemService
-){
+) {
     @GetMapping
     fun getNavItems() = service.queryAll()
 }

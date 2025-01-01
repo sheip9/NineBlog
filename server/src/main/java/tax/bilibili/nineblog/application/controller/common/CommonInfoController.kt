@@ -10,9 +10,9 @@ import tax.bilibili.nineblog.application.service.SettingService
 @RestController
 @CommonApi
 @RequestMapping("/info")
-class CommonInfoController @Autowired  constructor (
+class CommonInfoController @Autowired constructor(
     private val settingService: SettingService
-){
+) {
     @GetMapping
     fun getInfo() = settingService.getSiteInfo()
 

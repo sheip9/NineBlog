@@ -17,7 +17,7 @@ import tax.bilibili.nineblog.application.service.ArticleService
 @RequestMapping("/admin/articles")
 class AdminArticleController @Autowired constructor(
     private val articleService: ArticleService
-){
+) {
     @PostMapping
     @OnOk(code = HttpStatus.CREATED)
     fun createArticle(@RequestBody article: Article): Mono<*> = articleService.save(article).mapNotNull { it -> it.id }

@@ -18,7 +18,7 @@ class ExceptionAdvice : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(RuntimeException::class)
     @ResponseBody
-    fun handleExceptionToRestResponse(e: RuntimeException, exchange: ServerWebExchange) : Any{
+    fun handleExceptionToRestResponse(e: RuntimeException, exchange: ServerWebExchange): Any {
         val responseAnnotation = e.javaClass.getAnnotation(ResponseStatus::class.java)
         val status = responseAnnotation?.value ?: HttpStatus.INTERNAL_SERVER_ERROR
         val message = if (responseAnnotation?.reason?.isNotEmpty() == true) {
@@ -28,7 +28,7 @@ class ExceptionAdvice : ResponseEntityExceptionHandler() {
         }
         exchange.response.statusCode = status
         Thread().run {
-            if(e is ClientException || e is BusinessException) {
+            if (e is ClientException || e is BusinessException) {
                 return@run
             }
             e.printStackTrace()

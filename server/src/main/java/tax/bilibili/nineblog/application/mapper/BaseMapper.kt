@@ -1,7 +1,6 @@
 package tax.bilibili.nineblog.application.mapper
 
 import org.mapstruct.InheritInverseConfiguration
-import org.mapstruct.Mapping
 
 interface BaseMapper<D, E, V> {
     @InheritInverseConfiguration

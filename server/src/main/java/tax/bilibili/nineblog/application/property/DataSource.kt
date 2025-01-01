@@ -13,10 +13,12 @@ class DataSource {
     var user: String = ""
     var password: String = ""
     var database: String = "nineblog"
-//    var tablePrefix: String = "nb_"  // R2DBC还不能自动配置表前缀，待我后面实现
-    val driver : String
+
+    //    var tablePrefix: String = "nb_"  // R2DBC还不能自动配置表前缀，待我后面实现
+    val driver: String
         get() = type?.value.toString()
 }
+
 @Suppress("unused")
 enum class DatabaseType(val value: String) {
     MYSQL("mysql"), POSTGRES("postgresql"), MSSQL("mssql"), H2DB("h2")

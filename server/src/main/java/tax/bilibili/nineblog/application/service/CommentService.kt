@@ -15,7 +15,7 @@ class CommentService @Autowired constructor(
 
     fun findByArticleId(articleId: Number) = repository.findAllByArticleId(articleId)
 
-    fun save(commentDto : CommentDTO): Mono<Number> {
+    fun save(commentDto: CommentDTO): Mono<Number> {
         val comment = commentMapper.dtoToEntity(commentDto)
         return repository.save(comment).map {
             return@map it.id!!

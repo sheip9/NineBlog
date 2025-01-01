@@ -9,15 +9,17 @@ import tax.bilibili.nineblog.application.repository.SettingRepository
 
 @Service
 class SettingService : AbstractService<SettingRepository, Setting, Number>() {
-    fun getSiteInfo(): Mono<SiteInfo> = queryAll().collectList().flatMap{ it ->
+    fun getSiteInfo(): Mono<SiteInfo> = queryAll().collectList().flatMap { it ->
         val map = HashMap<SettingKey, String>()
         it.forEach { map[it.key] = it.value }
-        return@flatMap Mono.just(SiteInfo(
-            map[SettingKey.SITE_NAME]!!,
-            map[SettingKey.SITE_TITLE]!!,
-            map[SettingKey.SITE_SUBTITLE]!!,
-            map[SettingKey.SITE_FOOTER]!!,
-        ))
+        return@flatMap Mono.just(
+            SiteInfo(
+                map[SettingKey.SITE_NAME]!!,
+                map[SettingKey.SITE_TITLE]!!,
+                map[SettingKey.SITE_SUBTITLE]!!,
+                map[SettingKey.SITE_FOOTER]!!,
+            )
+        )
     }
 
     fun updateOneSetting(key: SettingKey, value: String): Mono<Boolean> = repository.updateByKey(key, value)

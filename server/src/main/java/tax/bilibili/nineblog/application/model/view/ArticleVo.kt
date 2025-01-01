@@ -1,6 +1,6 @@
 package tax.bilibili.nineblog.application.model.view
 
-data class ArticleVo (
+data class ArticleVo(
     val id: Number?,
     val authorId: Number,
     val title: String,
