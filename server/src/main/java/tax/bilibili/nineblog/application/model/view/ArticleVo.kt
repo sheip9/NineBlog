@@ -1,8 +1,10 @@
 package tax.bilibili.nineblog.application.model.view
 
+import tax.bilibili.nineblog.application.constant.IdType
+
 data class ArticleVo(
-    val id: Number?,
-    val authorId: Number,
+    val id: IdType?,
+    val authorId: IdType,
     val title: String,
     val content: String,
     val createdAt: String?,
