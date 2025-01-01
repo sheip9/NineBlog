@@ -10,7 +10,6 @@ import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.application.exception.BusinessException
 import tax.bilibili.nineblog.application.exception.ClientException
-import tax.bilibili.nineblog.application.model.RestResponse
 
 @RestControllerAdvice
 @Suppress("ReactiveStreamsUnusedPublisher")
@@ -33,7 +32,7 @@ class ExceptionAdvice : ResponseEntityExceptionHandler() {
             }
             e.printStackTrace()
         }
-        return Mono.just(RestResponse(status.value(), message, null))
+        return Mono.just(e)
     }
 
 //    override fun handleMethodArgumentNotValid(
