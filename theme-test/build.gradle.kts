@@ -1,7 +1,7 @@
 plugins {
     java
-//    id("org.springframework.boot") version "3.2.4"
-//    id("io.spring.dependency-management") version "1.1.4"
+    id("org.springframework.boot") version "3.2.4"
+    id("io.spring.dependency-management") version "1.1.4"
     alias(libs.plugins.kotlinJvm)
     application
 }
@@ -10,7 +10,6 @@ group = "tax.bilibili.nineblog"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 kotlin {
