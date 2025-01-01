@@ -5,4 +5,10 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.kotlinJvm) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.kotlinKapt) apply false
+}
+
+allprojects {
+    group = "tax.bilibili"
+    version = "0.0.1-SNAPSHOT"
 }
