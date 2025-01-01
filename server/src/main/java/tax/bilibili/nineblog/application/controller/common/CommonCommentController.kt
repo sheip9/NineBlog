@@ -19,5 +19,5 @@ class CommonCommentController @Autowired constructor(val service: CommentService
     fun getByArticleId(@RequestParam(value = "articleId") articleId: Number) = service.findByArticleId(articleId)
 
     @PostMapping
-    fun postNewComment(@RequestBody commentDto: CommentDTO) =
+    fun submitNew(@RequestBody commentDto: CommentDTO) = service.save(commentDto)
 }
