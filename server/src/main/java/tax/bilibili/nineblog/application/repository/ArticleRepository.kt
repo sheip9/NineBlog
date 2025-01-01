@@ -16,8 +16,8 @@ interface ArticleRepository : R2dbcRepository<Article, Number> {
     @Query("SELECT id, author_id, title, LEFT(content, 5) AS content, created_at, updated_at, visibility_level" +
             " FROM Article " +
             " ORDER BY id DESC " +
-            " OFFSET :offset  " +
-            " LIMIT :limit "
+            " LIMIT :limit" +
+            " OFFSET :offset "
             )
     fun findAll(limit: Number = 10, offset: Number = 0) : Flux<Article>
 }
