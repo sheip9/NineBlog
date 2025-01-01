@@ -1,11 +1,15 @@
 package tax.bilibili.nineblog.application.entity
 
+import org.springframework.data.annotation.Id
+import java.time.ZonedDateTime
+
 data class Comment(
-    val id: Number,
-    val articleId: Number,
-    val userId: Number,
-    val email: String,
-    val content: String,
-    val createdAt: String,
-    val isAudits: Boolean
+    @Id
+    val id: Long? = 0,
+    var articleId: Number,
+    var userId: Number?,
+    var email: String,
+    var content: String,
+    var createdAt: String?,
+    var auditAt: ZonedDateTime?,
 )
