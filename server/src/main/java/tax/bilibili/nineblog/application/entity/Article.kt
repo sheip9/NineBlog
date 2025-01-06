@@ -5,7 +5,7 @@ import tax.bilibili.nineblog.application.constant.IdType
 import java.time.ZonedDateTime
 
 //@Table(value = "#{@dataSource.tablePrefix}article")
-data class Article(
+data class Article (
     @Id
     val id: IdType? = 0,
     val authorId: IdType,
@@ -13,5 +13,5 @@ data class Article(
     var content: String,
     val createdAt: ZonedDateTime,
     var updatedAt: ZonedDateTime,
-    var visibilityLevel: IdType,
+    var visibilityLevel: Int,
 )

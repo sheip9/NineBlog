@@ -7,12 +7,11 @@ import java.time.ZonedDateTime
 data class Comment(
     @Id
     val id: IdType? = 0,
-    var articleId: IdType,
-    var replyTo: IdType?,
-    var userId: IdType?,
-    var nickname: String?,
-    var email: String,
-    var content: String,
-    var createdAt: String?,
+    val articleId: IdType,
+    val replyTo: IdType?,
+    val nickname: String?,
+    val email: String?,
+    val content: String,
+    val createdAt: ZonedDateTime? = ZonedDateTime.now(),
     var auditAt: ZonedDateTime?,
 )
