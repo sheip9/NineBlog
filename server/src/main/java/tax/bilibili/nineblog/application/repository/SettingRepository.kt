@@ -13,9 +13,10 @@ import tax.bilibili.nineblog.application.entity.Setting
 interface SettingRepository : R2dbcRepository<Setting, IdType> {
     @Modifying
     @Query(
-        "UPDATE Setting " +
-                "SET value = :value " +
-                "WHERE key = :key"
+        "INSERT INTO setting (`name`, `value`)" +
+                "VALUES" +
+                "(:name, :value)" +
+                "ON DUPLICATE KEY UPDATE `value` = :value;"
     )
-    fun updateByKey(key: SettingKey, value: String): Mono<Boolean>
+    fun updateByKey(name: SettingKey, value: String): Mono<Boolean>
 }
