@@ -54,7 +54,7 @@ class DatabaseInitUtils {
         return cdp.populate(c)
     }
 
-    fun getSQLResource(filename: String): ResourceDatabasePopulator {
+    private fun getSQLResource(filename: String): ResourceDatabasePopulator {
         return ResourceDatabasePopulator(ClassPathResource(filename))
     }
 }
