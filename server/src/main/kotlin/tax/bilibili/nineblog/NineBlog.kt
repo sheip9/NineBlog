@@ -2,7 +2,7 @@ package tax.bilibili.nineblog
 
 object NineBlog {
     const val VERSION = "0.0.1"
-    val BRANCH = BranchEnum.DEV
+    const val BRANCH = BranchEnum.DEV
 }
 
 private object BranchEnum {

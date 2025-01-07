@@ -24,4 +24,3 @@ fun main(args: Array<String>) {
         runApplication<NineBlogInitializeApplication>(*args)
     }
 }
-
