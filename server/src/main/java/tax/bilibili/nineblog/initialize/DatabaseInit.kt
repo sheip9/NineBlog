@@ -16,8 +16,18 @@ import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.application.property.DataSource
 import tax.bilibili.nineblog.application.property.DatabaseType.*
 
+/**
+ * DatabaseInit
+ * 数据库初始化类
+ */
 @Service
-class DatabaseInit  {
+class DatabaseInit {
+    /**
+     * createTables
+     * 创建表
+     *
+     * @param datasource 数据库连接参数
+     */
     fun createTables(datasource: DataSource): Mono<Void> {
         var c = ConnectionFactories.get(
             builder()
@@ -32,13 +42,15 @@ class DatabaseInit  {
 
         var cdp = CompositeDatabasePopulator()
         cdp.addPopulators(ResourceDatabasePopulator(ClassPathResource("initializer/table_creating.sql")))
-        when(datasource.type) {
+        //针对不同品牌数据库创建自增主键 索引等
+        when (datasource.type) {
             MYSQL -> cdp.addPopulators(ResourceDatabasePopulator(ClassPathResource("initializer/mysql.sql")))
             POSTGRES -> cdp.addPopulators(ResourceDatabasePopulator(ClassPathResource("initializer/postgres.sql")))
             MSSQL -> null
             H2DB -> null
             else -> null
         }
+
         return cdp.populate(c)
     }
 
