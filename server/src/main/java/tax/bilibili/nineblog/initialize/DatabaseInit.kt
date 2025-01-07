@@ -31,7 +31,7 @@ class DatabaseInit {
     fun createTables(datasource: DataSource): Mono<Void> {
         var c = ConnectionFactories.get(
             builder()
-                .option(DRIVER, "mysql")
+                .option(DRIVER, datasource.driver)
                 .option(HOST, datasource.host)
                 .option(PORT, datasource.port)
                 .option(USER, datasource.user)
