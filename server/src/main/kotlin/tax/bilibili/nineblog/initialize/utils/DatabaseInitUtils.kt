@@ -1,4 +1,4 @@
-package tax.bilibili.nineblog.initialize
+package tax.bilibili.nineblog.initialize.utils
 
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactoryOptions.DATABASE
@@ -17,11 +17,11 @@ import tax.bilibili.nineblog.application.property.DataSource
 import tax.bilibili.nineblog.application.property.DatabaseType.*
 
 /**
- * DatabaseInit
+ * DatabaseInitUtils
  * 数据库初始化类
  */
 @Service
-class DatabaseInit {
+class DatabaseInitUtils {
     /**
      * createTables
      * 创建表
@@ -41,11 +41,11 @@ class DatabaseInit {
         )
 
         var cdp = CompositeDatabasePopulator()
-        cdp.addPopulators(ResourceDatabasePopulator(ClassPathResource("initializer/table_creating.sql")))
+        cdp.addPopulators(getSQLResource("initializer/table_creating.sql"))
         //针对不同品牌数据库创建自增主键 索引等
         when (datasource.type) {
-            MYSQL -> cdp.addPopulators(ResourceDatabasePopulator(ClassPathResource("initializer/mysql.sql")))
-            POSTGRES -> cdp.addPopulators(ResourceDatabasePopulator(ClassPathResource("initializer/postgres.sql")))
+            MYSQL -> cdp.addPopulators(getSQLResource("initializer/mysql.sql"))
+            POSTGRES -> cdp.addPopulators(getSQLResource("initializer/postgres.sql"))
             MSSQL -> null
             H2DB -> null
             else -> null
@@ -54,4 +54,7 @@ class DatabaseInit {
         return cdp.populate(c)
     }
 
+    fun getSQLResource(filename: String): ResourceDatabasePopulator {
+        return ResourceDatabasePopulator(ClassPathResource(filename))
+    }
 }
