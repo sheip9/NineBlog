@@ -4,13 +4,3 @@ spring:
 server:
   http2:
     enabled: true
-
-
-
-nineblog:
-  datasource:
-    type: pgsql
-    user: postgres
-    password: postgres
-    host: 192.168.1.192
-    port: 5432
