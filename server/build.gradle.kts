@@ -58,6 +58,9 @@ tasks.withType<JavaCompile>().configureEach {
 //    ).forEach(options.compilerArgs::add)
 }
 
-tasks.withType<Test> {
+tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("PASSED", "FAILED", "SKIPPED")
+    }
 }
