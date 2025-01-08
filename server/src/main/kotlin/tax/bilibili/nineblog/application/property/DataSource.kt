@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 @ConfigurationProperties(prefix = "nineblog.datasource")
 class DataSource {
     @Suppress("MemberVisibilityCanBePrivate")
-    var type: DatabaseType? = null
+    var type: DatabaseType = DatabaseType.MYSQL
     var host: String = "127.0.0.1"
     var port: Int = 3306
     var user: String = ""
@@ -16,7 +16,7 @@ class DataSource {
 
     //    var tablePrefix: String = "nb_"  // R2DBC还不能自动配置表前缀，待我后面实现
     val driver: String
-        get() = type?.value.toString()
+        get() = type.value.toString()
 }
 
 @Suppress("unused")
