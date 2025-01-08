@@ -3,7 +3,7 @@ package tax.bilibili.nineblog
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest(classes = [NineBlogApplication::class])
+@SpringBootTest(classes = [NineBlogApplication::class, NineBlogInitializeApplication::class])
 class NineBlogApplicationTests {
     @Test
     fun contextLoads() {}
