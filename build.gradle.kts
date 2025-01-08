@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinJvm) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.kotlinKapt) apply false
+    alias(libs.plugins.kotlinKsp) apply false
 }
 
 allprojects {

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.springDependencyManagerment)
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.kotlinKapt)
+//    alias(libs.plugins.kotlinKsp)
     application
 }
 
@@ -40,7 +41,12 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
 }
 
-kapt{
+//ksp {
+//    arg("mapstruct.defaultComponentModel", "spring")
+//    arg("mapstruct.unmappedTargetPolicy", "IGNORE")
+//}
+
+kapt {
     arguments {
         arg("mapstruct.defaultComponentModel", "spring")
         arg("mapstruct.unmappedTargetPolicy", "IGNORE")
