@@ -7,7 +7,7 @@ CREATE TABLE Article (
       title varchar(255) NOT NULL,
       content text NOT NULL,
       created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      update_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
       visibility_level int
 );
 
