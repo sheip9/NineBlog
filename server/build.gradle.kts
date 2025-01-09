@@ -32,10 +32,13 @@ dependencies {
     implementation("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.2")
     kapt("org.mapstruct:mapstruct-processor:1.6.3")
     kapt("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.2")
-    //sql drive
+    //sql drive https://r2dbc.io/drivers/
+    runtimeOnly("com.oracle.database.r2dbc:oracle-r2dbc:1.3.0")
+    runtimeOnly("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
+    runtimeOnly("org.mariadb:r2dbc-mariadb:1.3.0")
+    runtimeOnly("io.r2dbc:r2dbc-mssql:1.0.0.RELEASE")
     runtimeOnly("io.asyncer:r2dbc-mysql:1.1.0")
     runtimeOnly("org.postgresql:r2dbc-postgresql:1.0.5.RELEASE")
-    runtimeOnly("io.r2dbc:r2dbc-mssql:1.0.0.RELEASE")
     //testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
