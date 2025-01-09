@@ -7,22 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
-import tax.bilibili.nineblog.application.property.DataSource
+import tax.bilibili.nineblog.application.property.DatasourceProperty
 
 @Configuration
 open class R2dbcConfiguration(
-    @Autowired val datasource: DataSource,
+    @Autowired val datasource: DatasourceProperty,
 ) : AbstractR2dbcConfiguration() {
     @Bean
     override fun connectionFactory(): ConnectionFactory {
         return ConnectionFactories.get(
             builder()
-                .option(DRIVER, datasource.driver)
+                .option(DRIVER, "pool")
                 .option(HOST, datasource.host)
                 .option(PORT, datasource.port)
                 .option(USER, datasource.user)
                 .option(PASSWORD, datasource.password)
                 .option(DATABASE, datasource.database)
+                .option(PROTOCOL, datasource.driver)
                 .build()
         )
     }

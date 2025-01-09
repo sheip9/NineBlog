@@ -3,10 +3,10 @@ package tax.bilibili.nineblog.application.property
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 
-@Component(value = "dataSource")
+@Component
 @ConfigurationProperties(prefix = "nineblog.datasource")
-class DataSource {
-    var type: DatabaseType = DatabaseType.MYSQL
+class DatasourceProperty {
+    var type: DatabaseDriver = DatabaseDriver.MYSQL
     var host: String = "127.0.0.1"
     var port: Int = 3306
     var user: String = ""
@@ -18,6 +18,6 @@ class DataSource {
         get() = type.value.toString()
 }
 
-enum class DatabaseType(val value: String) {
-    MYSQL("mysql"), POSTGRES("postgresql"), MSSQL("mssql"), H2DB("h2")
+enum class DatabaseDriver(val value: String) {
+    ORACLE("oracle"), H2("h2"), MARIADB("mariadb"), SQLSERVER("sqlserver"), MYSQL("mysql"), POSTGRES("postgresql"),
 }
