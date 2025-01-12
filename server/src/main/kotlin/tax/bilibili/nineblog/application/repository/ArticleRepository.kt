@@ -1,5 +1,6 @@
 package tax.bilibili.nineblog.application.repository
 
+import org.springframework.data.domain.Pageable
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.r2dbc.repository.R2dbcRepository
 import org.springframework.stereotype.Repository
@@ -24,4 +25,9 @@ interface ArticleRepository : R2dbcRepository<Article, IdType> {
                 " OFFSET :offset "
     )
     fun findAll(limit: Number = 10, offset: Number = 0): Flux<Article>
+
+    @Query("""
+        SELECT id, author_id, title, LEFT(content, 5) AS content, created_at, updated_at, visibility_level
+    """)
+    fun findArticlesByOrderByCreatedAtDesc(pageable: Pageable): Flux<Article>
 }

@@ -1,6 +1,7 @@
 package tax.bilibili.nineblog.application.service
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.application.entity.Article
@@ -12,7 +13,7 @@ import tax.bilibili.nineblog.application.repository.ArticleRepository
 class ArticleService @Autowired constructor(
     val articleMapper: ArticleMapper
 ) : AbstractService<ArticleRepository, Article, Number>() {
-    fun queryAll(page: Number, limit: Number) = repository.findAll(limit, (limit.toInt() - 1) * page.toInt())
+    fun queryAll(page: Int, limit: Int) = repository.findArticlesByOrderByCreatedAtDesc(PageRequest.of(page, limit))
 
     fun saveOrUpdate(dto: ArticleDTO): Mono<Number?> {
         val e = articleMapper.dtoToEntity(dto)

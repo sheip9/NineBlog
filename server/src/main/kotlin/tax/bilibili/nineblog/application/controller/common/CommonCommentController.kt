@@ -16,7 +16,10 @@ import tax.bilibili.nineblog.application.service.CommentService
 @RequestMapping("/comments")
 class CommonCommentController @Autowired constructor(val service: CommentService) {
     @GetMapping
-    fun getByArticleId(@RequestParam(value = "articleId") articleId: Number) = service.findByArticleId(articleId)
+    fun getByArticleId(@RequestParam(value = "articleId") articleId: Number, @RequestParam page: Int = 1, @RequestParam limit: Int = 10) = service.findByArticleId(articleId, page, limit)
+
+    @GetMapping("/count")
+    fun countByArticleId(@RequestParam(value = "articleId") articleId: Number) = service.countCommentByArticleId(articleId)
 
     @PostMapping
     fun submitNew(@RequestBody commentDto: CommentDTO) = service.save(commentDto)

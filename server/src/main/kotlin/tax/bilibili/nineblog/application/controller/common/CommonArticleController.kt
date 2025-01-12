@@ -10,7 +10,7 @@ import tax.bilibili.nineblog.application.service.ArticleService
 @RequestMapping("/articles")
 class CommonArticleController @Autowired constructor(private val service: ArticleService) {
     @GetMapping("/page")
-    fun getArticles(@RequestParam page: Number = 1, @RequestParam limit: Number = 10) = service.queryAll(page, limit)
+    fun getArticles(@RequestParam page: Int = 1, @RequestParam limit: Int = 10) = service.queryAll(page, limit)
 
     @GetMapping("/{id}")
     fun getArticleById(@PathVariable id: Number) = service.queryById(id)
