@@ -15,7 +15,7 @@ class CommentService @Autowired constructor(
     val commentMapper: CommentMapper,
 ) : AbstractService<CommentRepository, Comment, IdType>() {
 
-    fun findByArticleId(articleId: IdType, page: Int, limit: Int) = repository.findAllByArticleId(articleId, PageRequest.of(0, 1))
+    fun findByArticleId(articleId: IdType, page: Int, limit: Int) = repository.findAllByArticleId(articleId, PageRequest.of(page, limit))
 
     fun save(commentDto: CommentDTO): Mono<IdType> {
         val comment = commentMapper.dtoToEntity(commentDto)
