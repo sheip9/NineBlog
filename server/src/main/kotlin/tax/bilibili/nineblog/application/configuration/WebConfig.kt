@@ -1,4 +1,4 @@
-package tax.bilibili.nineblog.application.configure
+package tax.bilibili.nineblog.application.configuration
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration

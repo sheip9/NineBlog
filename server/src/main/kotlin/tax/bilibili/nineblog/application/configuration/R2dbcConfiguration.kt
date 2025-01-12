@@ -1,4 +1,4 @@
-package tax.bilibili.nineblog.application.configure
+package tax.bilibili.nineblog.application.configuration
 
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory

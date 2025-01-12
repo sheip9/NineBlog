@@ -1,4 +1,4 @@
-package tax.bilibili.nineblog.application.configure
+package tax.bilibili.nineblog.application.configuration
 
 import org.springframework.http.codec.HttpMessageWriter
 import org.springframework.web.reactive.HandlerResult
