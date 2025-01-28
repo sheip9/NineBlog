@@ -22,5 +22,5 @@ class SettingService : AbstractService<SettingRepository, Setting, Number>() {
         )
     }
 
-    fun updateOneSetting(key: SettingKey, value: String): Mono<Boolean> = repository.updateByKey(key, value)
+    fun updateOneSetting(key: SettingKey, value: String): Mono<Setting?> = repository.save(Setting(key, value))
 }
