@@ -5,7 +5,7 @@ junit = "4.13.2"
 kotlin = "2.0.0"
 logback = "1.5.6"
 springBoot = "3.4.1"
-springDependencyManagerment = "1.1.4"
+springDependencyManagerment = "1.1.7"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
