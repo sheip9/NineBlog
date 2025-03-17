@@ -29,9 +29,9 @@ dependencies {
 //    implementation("cn.dev33:sa-token-spring-boot3-starter:1.37.0")
     //mapstruct
     implementation ("org.mapstruct:mapstruct:1.6.3")
-    implementation("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.2")
+    implementation("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.3")
     kapt("org.mapstruct:mapstruct-processor:1.6.3")
-    kapt("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.2")
+    kapt("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.3")
     //sql drive https://r2dbc.io/drivers/
     runtimeOnly("com.oracle.database.r2dbc:oracle-r2dbc:1.3.0")
     runtimeOnly("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
