@@ -19,7 +19,7 @@ repositories {
 dependencies {
     //kotlin base
     implementation(kotlin("stdlib-jdk8"))
-    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.1.10")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.1.20")
     //spring framework
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
