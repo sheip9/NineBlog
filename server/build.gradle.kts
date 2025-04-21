@@ -37,7 +37,7 @@ dependencies {
     runtimeOnly("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
     runtimeOnly("org.mariadb:r2dbc-mariadb:1.3.0")
     runtimeOnly("io.r2dbc:r2dbc-mssql:1.0.2.RELEASE")
-    runtimeOnly("io.asyncer:r2dbc-mysql:1.4.0")
+    runtimeOnly("io.asyncer:r2dbc-mysql:1.4.1")
     runtimeOnly("org.postgresql:r2dbc-postgresql:1.0.7.RELEASE")
     //testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
