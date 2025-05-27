@@ -2,13 +2,14 @@ package tax.bilibili.nineblog.application.service
 
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
+import tax.bilibili.nineblog.application.constant.ObjectId
 import tax.bilibili.nineblog.application.constant.SettingKey
 import tax.bilibili.nineblog.application.entity.Setting
 import tax.bilibili.nineblog.application.model.SiteInfo
 import tax.bilibili.nineblog.application.repository.SettingRepository
 
 @Service
-class SettingService : AbstractService<SettingRepository, Setting, Number>() {
+class SettingService : AbstractService<SettingRepository, Setting, ObjectId>() {
     fun getSiteInfo(): Mono<SiteInfo> = queryAll().collectList().flatMap { it ->
         val map = HashMap<SettingKey, String>()
         it.forEach { map[it.name] = it.value }

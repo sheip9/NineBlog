@@ -1,11 +1,11 @@
 package tax.bilibili.nineblog.application.model.view
 
-import tax.bilibili.nineblog.application.constant.IdType
+import tax.bilibili.nineblog.application.constant.ObjectId
 import java.time.ZonedDateTime
 
 data class CommentVo(
-    val id: IdType,
-    val replyTo: IdType,
+    val id: ObjectId,
+    val replyTo: ObjectId,
     val nickname: String,
     val content: String,
     val createdAt: ZonedDateTime,

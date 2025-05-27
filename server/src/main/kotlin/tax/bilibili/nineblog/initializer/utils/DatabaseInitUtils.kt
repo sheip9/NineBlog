@@ -1,13 +1,29 @@
 package tax.bilibili.nineblog.initializer.utils
 
-import io.r2dbc.spi.ConnectionFactory
-import org.springframework.core.io.ClassPathResource
-import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
-import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
+import org.hibernate.boot.MetadataSources
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+import org.hibernate.boot.model.naming.Identifier
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder
+import org.hibernate.cfg.AvailableSettings
+import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment
+import org.hibernate.tool.schema.TargetType
+import org.hibernate.tool.schema.internal.SchemaCreatorImpl
+import org.hibernate.tool.schema.internal.exec.GenerationTargetToScript
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToWriter
+import org.hibernate.tool.schema.spi.ScriptTargetOutput
+import org.hibernate.tool.schema.spi.TargetDescriptor
 import org.springframework.stereotype.Component
+import reactor.core.CorePublisher
+import reactor.core.publisher.DirectProcessor
+import reactor.core.publisher.Flux
+import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
-import tax.bilibili.nineblog.application.property.DatabaseDriver
+import reactor.core.publisher.Sinks
+import tax.bilibili.nineblog.application.entity.*
 import tax.bilibili.nineblog.application.property.DatabaseDriver.*
+import tax.bilibili.nineblog.application.property.DatasourceProperty
+import java.io.StringWriter
+import java.util.*
 
 /**
  * DatabaseInitUtils
@@ -19,22 +35,87 @@ class DatabaseInitUtils {
      * createTables
      * 创建表
      */
-    fun createTables(cf: ConnectionFactory, driveType: DatabaseDriver): Mono<Void> {
-        var cdp = CompositeDatabasePopulator()
-        cdp.addPopulators(getSQLResource("initializer/table_creating.sql"))
-        //针对不同品牌数据库创建自增主键 索引等
-        when (driveType) {
-            MYSQL -> cdp.addPopulators(getSQLResource("initializer/mysql.sql"))
-            POSTGRES -> cdp.addPopulators(getSQLResource("initializer/postgres.sql"))
-            SQLSERVER -> null
-            H2 -> null
-            else -> null
+    fun prepareSQL(datasource: DatasourceProperty): Flux<String> {
+        fun getDialect(): String {
+            return when (datasource.type) {
+                ORACLE -> "org.hibernate.dialect.OracleDialect"
+                MARIADB -> "org.hibernate.dialect.MariaDBDialect"
+                SQLSERVER -> "org.hibernate.dialect.SQLServerDialect"
+                MYSQL -> "org.hibernate.dialect.MySQLDialect"
+                POSTGRES -> "org.hibernate.dialect.PostgreSQLDialect"
+            }
+        }
+        println(getDialect())
+        try {
+            val serviceRegistry = StandardServiceRegistryBuilder()
+                .applySettings(mapOf(
+                    "hibernate.physical_naming_strategy" to "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy",
+                    "hibernate.connection.provider_class" to "org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl",
+                    "hibernate.temp.use_jdbc_metadata_defaults" to "false",
+                    "hibernate.dialect" to getDialect(),
+                    "hibernate.connection.url" to "jdbc:h2:mem:fake;DB_CLOSE_DELAY=-1"
+                ))
+                .apply {
+                    settings[AvailableSettings.PHYSICAL_NAMING_STRATEGY] = object :
+                        CamelCaseToUnderscoresNamingStrategy() {
+                        override fun toPhysicalTableName(logicalName: Identifier?, context: JdbcEnvironment?): Identifier? {
+                            val s = super.toPhysicalTableName(logicalName, context)
+                            return Identifier(datasource.tablePrefix + s.text, s.isQuoted)
+                        }
+                    }
+                }
+                .build()
+
+            val entities : Array<Class<*>> = arrayOf(Article::class.java,  Comment::class.java, User::class.java)
+
+            val ms = MetadataSources(serviceRegistry)
+            for (any in entities) {
+                ms.addAnnotatedClass(any)
+            }
+//            ms.addAnnotatedClass(Article::class.java)
+//            ms.addAnnotatedClass(Comment::class.java)
+            val metadata = ms.buildMetadata(serviceRegistry)
+
+//            val export = SchemaExport().apply {
+//                setFormat(true) // 格式化SQL
+//                setDelimiter(";") // 设置分隔符
+//                setOutputFile("create.sql")
+//                setHaltOnError(false)
+//            }
+
+            val writer = StringWriter()
+            val sink = Sinks.many().unicast().onBackpressureBuffer<String>();
+
+            val o = object : TargetDescriptor {
+                override fun getTargetTypes(): EnumSet<TargetType?> {
+                    return EnumSet.of(TargetType.SCRIPT)
+                }
+
+                override fun getScriptTargetOutput(): ScriptTargetOutput {
+                    return object : ScriptTargetOutputToWriter(writer) {
+                        override fun accept(command: String?) {
+                            super.accept(command)
+                            command?.let {
+                                sink.tryEmitNext(command)
+                            }
+                        }
+                    }
+                }
+            }
+
+            val target = GenerationTargetToScript(
+                o.scriptTargetOutput, ";"
+            )
+//            export.execute(EnumSet.of(TargetType.STDOUT, TargetType.SCRIPT),  SchemaExport.Action.CREATE, metadata)
+            SchemaCreatorImpl(serviceRegistry).doCreation(metadata,  false, target)
+
+            sink.tryEmitComplete()
+
+            return sink.asFlux()
+        } catch (e: Exception) {
+            return Flux.error(e)
         }
 
-        return cdp.populate(cf)
     }
 
-    private fun getSQLResource(filename: String): ResourceDatabasePopulator {
-        return ResourceDatabasePopulator(ClassPathResource(filename))
-    }
 }

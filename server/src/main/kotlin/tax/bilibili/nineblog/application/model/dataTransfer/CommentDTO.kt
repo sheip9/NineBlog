@@ -1,11 +1,12 @@
 package tax.bilibili.nineblog.application.model.dataTransfer
 
 import jakarta.validation.constraints.NotEmpty
+import tax.bilibili.nineblog.application.constant.ObjectId
 
 data class CommentDTO(
     @NotEmpty
-    val articleId: Number,
-    val replyTo: Number?,
+    val articleId: ObjectId,
+    val replyTo: ObjectId?,
     @NotEmpty
     val nickname: String,
     @NotEmpty

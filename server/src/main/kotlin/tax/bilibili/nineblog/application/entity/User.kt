@@ -1,9 +1,14 @@
 package tax.bilibili.nineblog.application.entity
 
-import tax.bilibili.nineblog.application.constant.IdType
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import tax.bilibili.nineblog.application.constant.ObjectId
+import java.time.ZonedDateTime
 
+@Entity
 data class User(
-    val id: IdType,
+    @Id
+    override val id: ObjectId,
     val username: String,
     val nickname: String,
     val email: String,
@@ -11,4 +16,6 @@ data class User(
     val salt: String,
     val lastLoginTime: String,
     val registrationTime: String,
-)
+    override val createdAt: ZonedDateTime,
+    override val updatedAt: ZonedDateTime,
+) : BaseEntity

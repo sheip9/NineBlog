@@ -12,11 +12,11 @@ class DatasourceProperty {
     var user: String = ""
     var password: String = ""
     var database: String = "nineblog"
-    var tablePrefix: String = ""
+    var tablePrefix: String = "nb_"
     val driver: String
         get() = type.value
 }
 
 enum class DatabaseDriver(val value: String) {
-    ORACLE("oracle"), H2("h2"), MARIADB("mariadb"), SQLSERVER("sqlserver"), MYSQL("mysql"), POSTGRES("postgresql"),
+    ORACLE("oracle"), MARIADB("mariadb"), SQLSERVER("sqlserver"), MYSQL("mysql"), POSTGRES("postgresql"),
 }

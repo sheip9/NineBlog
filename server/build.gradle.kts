@@ -26,6 +26,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.hibernate:hibernate-core:7.0.0.Final")
+    implementation("org.hibernate.tool:hibernate-tools-orm:7.0.0.CR2")
 //    implementation("cn.dev33:sa-token-spring-boot3-starter:1.37.0")
     //mapstruct
     implementation ("org.mapstruct:mapstruct:1.6.3")

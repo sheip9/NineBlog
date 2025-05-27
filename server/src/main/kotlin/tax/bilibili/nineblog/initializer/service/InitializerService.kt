@@ -2,25 +2,22 @@ package tax.bilibili.nineblog.initializer.service
 
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
-import io.r2dbc.spi.ConnectionFactoryOptions.DATABASE
-import io.r2dbc.spi.ConnectionFactoryOptions.DRIVER
-import io.r2dbc.spi.ConnectionFactoryOptions.HOST
-import io.r2dbc.spi.ConnectionFactoryOptions.PASSWORD
-import io.r2dbc.spi.ConnectionFactoryOptions.PORT
-import io.r2dbc.spi.ConnectionFactoryOptions.USER
-import io.r2dbc.spi.ConnectionFactoryOptions.builder
+import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import tax.bilibili.nineblog.application.property.DatabaseDriver
 import tax.bilibili.nineblog.application.property.DatasourceProperty
 import tax.bilibili.nineblog.initializer.exception.DatabaseNotInitException
+import tax.bilibili.nineblog.initializer.model.DatasourceModel
 import tax.bilibili.nineblog.initializer.utils.DatabaseInitUtils
 
 @Service
 class InitializerService @Autowired constructor(
-    val databaseInitUtils: DatabaseInitUtils
-){
+    val databaseInitUtils: DatabaseInitUtils,
+) {
     var datasource: DatasourceProperty? = null
     var connectionFactory: ConnectionFactory? = null
 
@@ -46,15 +43,25 @@ class InitializerService @Autowired constructor(
         val client = DatabaseClient.create(c)
         return client.sql("SELECT VERSION()").mapValue(String::class.java).first().doOnSuccess {
             connectionFactory = c
-        }.onErrorResume {
-                t -> Mono.just("error")
+        }.onErrorResume { t ->
+            Mono.just("error")
         }
     }
 
-    fun createTables(): Mono<Void> {
+    fun createTables(): Any {
         if (connectionFactory == null || datasource == null) {
             throw DatabaseNotInitException()
         }
-        return databaseInitUtils.createTables(connectionFactory!!, datasource!!.type)
+
+        val client = DatabaseClient.create(connectionFactory!!)
+//        return databaseInitUtils.prepareSQL(datasource!!).map {
+//            sql -> client.sql(sql).mapValue(String::class.java).first().block()
+//        }
+        return databaseInitUtils.prepareSQL(datasource!!).collectList().map { it ->
+            for (sql in it) {
+                client.sql(sql).mapValue(String::class.java).first().subscribe { }
+            }
+        }
+
     }
 }
