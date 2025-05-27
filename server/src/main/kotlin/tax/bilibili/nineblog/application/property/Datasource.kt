@@ -12,10 +12,9 @@ class DatasourceProperty {
     var user: String = ""
     var password: String = ""
     var database: String = "nineblog"
-
-    //    var tablePrefix: String = "nb_"  // R2DBC还不能自动配置表前缀，待我后面实现
+    var tablePrefix: String = ""
     val driver: String
-        get() = type.value.toString()
+        get() = type.value
 }
 
 enum class DatabaseDriver(val value: String) {
