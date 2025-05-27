@@ -20,7 +20,7 @@ class ExceptionAdvice : ResponseEntityExceptionHandler() {
     fun handleExceptionToRestResponse(e: RuntimeException, exchange: ServerWebExchange): Any {
         val responseAnnotation = e.javaClass.getAnnotation(ResponseStatus::class.java)
         val status = responseAnnotation?.value ?: HttpStatus.INTERNAL_SERVER_ERROR
-        val message = if (responseAnnotation?.reason?.isNotEmpty() == true) {
+        if (responseAnnotation?.reason?.isNotEmpty() == true) {
             "${responseAnnotation.reason} : ${e.message}"
         } else {
             e.message ?: ""

@@ -6,12 +6,9 @@ import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import tax.bilibili.nineblog.application.property.DatabaseDriver
 import tax.bilibili.nineblog.application.property.DatasourceProperty
 import tax.bilibili.nineblog.initializer.exception.DatabaseNotInitException
-import tax.bilibili.nineblog.initializer.model.DatasourceModel
 import tax.bilibili.nineblog.initializer.utils.DatabaseInitUtils
 
 @Service
@@ -30,7 +27,7 @@ class InitializerService @Autowired constructor(
         if (datasource == null) {
             throw DatabaseNotInitException()
         }
-        var c = ConnectionFactories.get(
+        val c = ConnectionFactories.get(
             builder()
                 .option(DRIVER, datasource!!.driver)
                 .option(HOST, datasource!!.host)

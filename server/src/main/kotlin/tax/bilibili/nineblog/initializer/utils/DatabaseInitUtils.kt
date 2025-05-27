@@ -13,13 +13,11 @@ import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToWriter
 import org.hibernate.tool.schema.spi.ScriptTargetOutput
 import org.hibernate.tool.schema.spi.TargetDescriptor
 import org.springframework.stereotype.Component
-import reactor.core.CorePublisher
-import reactor.core.publisher.DirectProcessor
 import reactor.core.publisher.Flux
-import reactor.core.publisher.FluxSink
-import reactor.core.publisher.Mono
 import reactor.core.publisher.Sinks
-import tax.bilibili.nineblog.application.entity.*
+import tax.bilibili.nineblog.application.entity.Article
+import tax.bilibili.nineblog.application.entity.Comment
+import tax.bilibili.nineblog.application.entity.User
 import tax.bilibili.nineblog.application.property.DatabaseDriver.*
 import tax.bilibili.nineblog.application.property.DatasourceProperty
 import java.io.StringWriter
@@ -84,7 +82,7 @@ class DatabaseInitUtils {
 //            }
 
             val writer = StringWriter()
-            val sink = Sinks.many().unicast().onBackpressureBuffer<String>();
+            val sink = Sinks.many().unicast().onBackpressureBuffer<String>()
 
             val o = object : TargetDescriptor {
                 override fun getTargetTypes(): EnumSet<TargetType?> {

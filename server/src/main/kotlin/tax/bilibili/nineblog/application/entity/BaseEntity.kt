@@ -1,6 +1,5 @@
 package tax.bilibili.nineblog.application.entity
 
-import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import org.springframework.data.annotation.Id
 import tax.bilibili.nineblog.application.constant.ObjectId

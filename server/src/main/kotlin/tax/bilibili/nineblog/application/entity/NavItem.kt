@@ -8,5 +8,5 @@ data class NavItem(
     val text: String,
     val link: String,
     val priority: Int,
-    val parentItem: Number?
+    val parentItem: Number?,
 )

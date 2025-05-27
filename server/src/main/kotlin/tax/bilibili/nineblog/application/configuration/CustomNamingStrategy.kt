@@ -8,9 +8,9 @@ import org.springframework.data.relational.core.mapping.NamingStrategy
 import tax.bilibili.nineblog.application.property.DatasourceProperty
 
 @Configuration
-open class CustomNamingStrategy @Autowired constructor(@Autowired val datasource: DatasourceProperty){
+open class CustomNamingStrategy @Autowired constructor(@Autowired val datasource: DatasourceProperty) {
     @Bean
-    open fun namingStrategy() : NamingStrategy {
+    open fun namingStrategy(): NamingStrategy {
         return object : DefaultNamingStrategy() {
             override fun getTableName(type: Class<*>): String {
                 return datasource.tablePrefix + super.getTableName(type)

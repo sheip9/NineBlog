@@ -1,13 +1,13 @@
 package tax.bilibili.nineblog.initializer.model
 
-import tax.bilibili.nineblog.application.property.DatasourceProperty
 import tax.bilibili.nineblog.application.property.DatabaseDriver
+import tax.bilibili.nineblog.application.property.DatasourceProperty
 
 /**
  * DatasourceModel
  * 数据库配置模型
  */
-data class DatasourceModel (
+data class DatasourceModel(
     var type: DatabaseDriver,
     var host: String,
     var port: Int,
@@ -15,7 +15,7 @@ data class DatasourceModel (
     var password: String,
     var database: String,
 ) {
-    fun toProperty() : DatasourceProperty {
+    fun toProperty(): DatasourceProperty {
         return DatasourceProperty().apply {
             this.type = this@DatasourceModel.type
             this.host = this@DatasourceModel.host
