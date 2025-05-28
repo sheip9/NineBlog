@@ -14,7 +14,9 @@ import org.hibernate.tool.schema.spi.ScriptTargetOutput
 import org.hibernate.tool.schema.spi.TargetDescriptor
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import reactor.core.publisher.Sinks
+import reactor.core.scheduler.Schedulers
 import tax.bilibili.nineblog.application.entity.Article
 import tax.bilibili.nineblog.application.entity.Comment
 import tax.bilibili.nineblog.application.entity.User
@@ -82,33 +84,33 @@ class DatabaseInitUtils {
 //            }
 
             val writer = StringWriter()
-            val sink = Sinks.many().unicast().onBackpressureBuffer<String>()
+            val sink = Sinks.many().replay().all<String>()
 
-            val o = object : TargetDescriptor {
-                override fun getTargetTypes(): EnumSet<TargetType?> {
-                    return EnumSet.of(TargetType.SCRIPT)
-                }
+            Mono.fromRunnable<String> {
+                val o = object : TargetDescriptor {
+                    override fun getTargetTypes(): EnumSet<TargetType?> {
+                        return EnumSet.of(TargetType.SCRIPT)
+                    }
 
-                override fun getScriptTargetOutput(): ScriptTargetOutput {
-                    return object : ScriptTargetOutputToWriter(writer) {
-                        override fun accept(command: String?) {
-                            super.accept(command)
-                            command?.let {
-                                sink.tryEmitNext(command)
+                    override fun getScriptTargetOutput(): ScriptTargetOutput {
+                        return object : ScriptTargetOutputToWriter(writer) {
+                            override fun accept(command: String?) {
+                                super.accept(command)
+                                command?.let {
+                                    sink.tryEmitNext(command)
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            val target = GenerationTargetToScript(
-                o.scriptTargetOutput, ";"
-            )
-//            export.execute(EnumSet.of(TargetType.STDOUT, TargetType.SCRIPT),  SchemaExport.Action.CREATE, metadata)
-            SchemaCreatorImpl(serviceRegistry).doCreation(metadata,  false, target)
+                val target = GenerationTargetToScript(
+                    o.scriptTargetOutput, ";"
+                )
 
-            sink.tryEmitComplete()
-
+                SchemaCreatorImpl(serviceRegistry).doCreation(metadata, false, target)
+                sink.tryEmitComplete()
+            }.subscribeOn(Schedulers.boundedElastic()).subscribe()
             return sink.asFlux()
         } catch (e: Exception) {
             return Flux.error(e)

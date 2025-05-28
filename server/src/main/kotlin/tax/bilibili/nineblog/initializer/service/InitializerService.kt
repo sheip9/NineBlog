@@ -54,11 +54,13 @@ class InitializerService @Autowired constructor(
 //        return databaseInitUtils.prepareSQL(datasource!!).map {
 //            sql -> client.sql(sql).mapValue(String::class.java).first().block()
 //        }
-        return databaseInitUtils.prepareSQL(datasource!!).collectList().map { it ->
-            for (sql in it) {
-                client.sql(sql).mapValue(String::class.java).first().subscribe { }
+        return databaseInitUtils.prepareSQL(datasource!!)
+            .flatMap { it ->
+                client
+                    .sql(it)
+                    .mapValue(String::class.java).one().map { it -> "success" }
+                    .onErrorResume { it -> Mono.just(it.toString()) }
             }
-        }
 
     }
 }
