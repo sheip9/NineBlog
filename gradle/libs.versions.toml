@@ -2,7 +2,7 @@
 java = "17"
 compose-plugin = "1.8.2"
 junit = "4.13.2"
-kotlin = "2.1.10"
+kotlin = "2.2.0"
 logback = "1.5.18"
 springBoot = "3.5.3"
 springDependencyManagerment = "1.1.7"
