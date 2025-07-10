@@ -8,9 +8,9 @@ import reactor.core.publisher.Mono
 import tax.bilibili.nineblog.LogInterface
 
 abstract class AbstractService<R : R2dbcRepository<T, ID>, T, ID> : LogInterface {
-    @Suppress("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
+
     lateinit var repository: R
+    @Autowired set
 
     @Autowired
     lateinit var template: R2dbcEntityTemplate
