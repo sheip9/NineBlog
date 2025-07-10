@@ -6,8 +6,9 @@ import org.springframework.stereotype.Component
 @Component
 @ConfigurationProperties(prefix = "nineblog.datasource")
 class DatasourceProperty {
+
     var type: DatabaseDriver = DatabaseDriver.MYSQL
-    var host: String = "127.0.0.1"
+    var host: String = "localhost"
     var port: Int = 3306
     var user: String = ""
     var password: String = ""
