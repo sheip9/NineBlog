@@ -45,7 +45,7 @@ class DatabaseInitUtils {
                 POSTGRES -> "org.hibernate.dialect.PostgreSQLDialect"
             }
         }
-        println(getDialect())
+
         try {
             val serviceRegistry = StandardServiceRegistryBuilder()
                 .applySettings(mapOf(

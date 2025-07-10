@@ -22,7 +22,6 @@ class InitializerController @Autowired constructor(
 ){
     @PostMapping
     fun postDatasourceProperty(@RequestBody x: DatasourceModel): Any {
-        println(ObjectMapper().writeValueAsString(x))
         return service.saveDatasource(x.toProperty())
     }
 
