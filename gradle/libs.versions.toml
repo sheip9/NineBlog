@@ -4,7 +4,7 @@ compose-plugin = "1.8.2"
 junit = "4.13.2"
 kotlin = "2.2.10"
 logback = "1.5.18"
-springBoot = "3.5.3"
+springBoot = "3.5.5"
 springDependencyManagerment = "1.1.7"
 
 [libraries]
