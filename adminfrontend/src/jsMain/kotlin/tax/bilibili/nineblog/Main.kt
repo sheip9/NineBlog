@@ -1,9 +1,11 @@
 package tax.bilibili.nineblog
 
 import kotlinx.browser.document
-import org.w3c.dom.HTMLDivElement
+import react.create
+import react.dom.client.createRoot
+import web.html.HTMLDivElement
 
 fun main() {
-    document.getElementById("root") as HTMLDivElement
-
+    val container = document.getElementById("root") as HTMLDivElement
+    createRoot(container).render(App.create())
 }

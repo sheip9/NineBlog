@@ -1,10 +1,15 @@
 package tax.bilibili.nineblog
 
-import org.w3c.dom.HTMLCollection
-import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.css.CSSStyleDeclaration
+import react.FC
+import react.Props
+import react.dom.html.ReactHTML.h1
 
-abstract class App(
-    var formContainer: HTMLDivElement
-) {
+/**
+ * App
+ *
+ * @author sheip9
+ * @since 2025/8/26
+ **/
+val App = FC<Props> {
+    h1 { +"Hello World" }
 }
