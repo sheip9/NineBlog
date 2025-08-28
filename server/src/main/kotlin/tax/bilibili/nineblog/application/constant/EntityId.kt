@@ -1,3 +1,3 @@
 package tax.bilibili.nineblog.application.constant
 
-typealias ObjectId = Long
+typealias EntityId = Long
