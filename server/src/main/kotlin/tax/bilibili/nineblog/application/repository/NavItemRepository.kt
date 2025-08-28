@@ -3,10 +3,10 @@ package tax.bilibili.nineblog.application.repository
 import org.springframework.data.r2dbc.repository.R2dbcRepository
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
-import tax.bilibili.nineblog.application.constant.ObjectId
+import tax.bilibili.nineblog.application.constant.EntityId
 import tax.bilibili.nineblog.application.entity.NavItem
 
 @Repository
-interface NavItemRepository : R2dbcRepository<NavItem, ObjectId> {
+interface NavItemRepository : R2dbcRepository<NavItem, EntityId> {
     fun findNavItemByOrderByPriority(): Flux<NavItem>
 }

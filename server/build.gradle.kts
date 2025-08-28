@@ -27,7 +27,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.hibernate.tool:hibernate-tools-orm:7.1.0.Final")
-//    implementation("cn.dev33:sa-token-spring-boot3-starter:1.37.0")
+    //sa-token https://sa-token.cc
+    implementation("cn.dev33:sa-token-reactor-spring-boot3-starter:1.44.0")
     //mapstruct
     implementation ("org.mapstruct:mapstruct:1.6.3")
     implementation("org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.1.3")

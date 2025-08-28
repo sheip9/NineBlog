@@ -1,10 +1,10 @@
 package tax.bilibili.nineblog.application.model.view
 
-import tax.bilibili.nineblog.application.constant.ObjectId
+import tax.bilibili.nineblog.application.constant.EntityId
 
 data class ArticleVo(
-    val id: ObjectId?,
-    val authorId: ObjectId,
+    val id: EntityId?,
+    val authorId: EntityId,
     val title: String,
     val content: String,
     val createdAt: String?,

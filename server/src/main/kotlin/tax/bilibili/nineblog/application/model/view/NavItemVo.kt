@@ -1,9 +1,9 @@
 package tax.bilibili.nineblog.application.model.view
 
-import tax.bilibili.nineblog.application.constant.ObjectId
+import tax.bilibili.nineblog.application.constant.EntityId
 
 data class NavItemVo(
-    val id: ObjectId,
+    val id: EntityId,
     val text: String,
     val link: String,
     val priority: Int,

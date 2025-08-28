@@ -1,9 +1,12 @@
 package tax.bilibili.nineblog.application.model.dataTransfer
 
-import tax.bilibili.nineblog.application.constant.ObjectId
+import jakarta.validation.constraints.NotEmpty
+import tax.bilibili.nineblog.application.constant.EntityId
 
 data class ArticleDTO(
-    val id: ObjectId?,
+    val authorId: EntityId,
+    @param:NotEmpty(message = "{ArticleDTO.title.NotEmpty}")
     val title: String,
     val content: String,
+    val visibilityLevel: Int,
 )
