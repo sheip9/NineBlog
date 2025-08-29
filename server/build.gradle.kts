@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     java
     alias(libs.plugins.springBoot)
@@ -61,6 +63,12 @@ kapt {
 tasks.withType<JavaCompile>().configureEach {
 //    listOf(
 //    ).forEach(options.compilerArgs::add)
+}
+
+tasks.named<BootJar>("bootJar") {
+    manifest {
+        attributes["Implementation-Version"] = version
+    }
 }
 
 tasks.test {

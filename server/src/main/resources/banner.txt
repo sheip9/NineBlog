@@ -1,0 +1,8 @@
+ _   _ _            ____  _
+| \ | (_)_ __   ___| __ )| | ___   __ _
+|  \| | | '_ \ / _ \  _ \| |/ _ \ / _` |
+| |\  | | | | |  __/ |_) | | (_) | (_| |
+|_| \_|_|_| |_|\___|____/|_|\___/ \__, |
+                                  |___/
+ -- NineBlog Version:${application.formatted-version}
+${AnsiColor.GREEN} :: Spring Boot :: ${AnsiColor.DEFAULT} ${spring-boot.formatted-version}
