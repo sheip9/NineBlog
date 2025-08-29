@@ -1,7 +1,9 @@
 package tax.bilibili.nineblog.application.configuration
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.ErrorResponse
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.method.HandlerTypePredicate
 import org.springframework.web.reactive.config.EnableWebFlux
@@ -14,7 +16,7 @@ import tax.bilibili.nineblog.application.annoucement.CommonApi
 
 
 @Configuration
-@EnableWebFlux
+@EnableAutoConfiguration
 open class WebConfig @Autowired constructor(
     private val thymeleafReactiveViewResolver: ThymeleafReactiveViewResolver
 ) : WebFluxConfigurer {
@@ -37,5 +39,9 @@ open class WebConfig @Autowired constructor(
      */
     override fun configureViewResolvers(registry: ViewResolverRegistry) {
         registry.viewResolver(thymeleafReactiveViewResolver)
+    }
+
+    override fun addErrorResponseInterceptors(interceptors: List<ErrorResponse.Interceptor>) {
+
     }
 }

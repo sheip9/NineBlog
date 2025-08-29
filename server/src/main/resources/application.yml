@@ -1,4 +1,7 @@
 spring:
+  webflux:
+    problemdetails:
+      enabled: true
   application:
     name: NineBlog
 server:
