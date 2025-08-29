@@ -1,15 +1,14 @@
 package tax.bilibili.nineblog.application.controller.admin
 
+import jakarta.validation.constraints.Positive
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import reactor.core.publisher.Mono
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
 import tax.bilibili.nineblog.application.annoucement.AdminApi
 import tax.bilibili.nineblog.application.annoucement.OnOk
-import tax.bilibili.nineblog.application.entity.Article
+import tax.bilibili.nineblog.application.constant.EntityId
+import tax.bilibili.nineblog.application.model.dataTransfer.ArticleDTO
 import tax.bilibili.nineblog.application.service.ArticleService
 
 @RestController
@@ -20,6 +19,9 @@ class AdminArticleController @Autowired constructor(
 ) {
     @PostMapping
     @OnOk(code = HttpStatus.CREATED)
-    fun createArticle(@RequestBody article: Article): Mono<*> = articleService.save(article).mapNotNull { it -> it.id }
+    fun createArticle(@RequestBody @Validated article: ArticleDTO) = articleService.save(article)
 
+
+    @PatchMapping("/{id}")
+    fun updateArticle(@PathVariable("id") @Positive id: EntityId, @RequestBody @Validated article: ArticleDTO) = articleService.updateById(id,article)
 }
